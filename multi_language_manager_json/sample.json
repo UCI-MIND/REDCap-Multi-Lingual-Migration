@@ -1,0 +1,23 @@
+{
+    "creator": "REDCap MLM",
+    "version": "v12.0.11",
+    "timestamp": "2022-01-24 12:00:00",
+    "instructions": "How to use this file: The essential elements are all 'id' and 'translation' items and the paths leading to them, as well as the root elements 'creator' (must be left as is), 'key', 'display', and 'rtl'. All other items, including this text, are non-essential and will not be regarded during an import operation. Furthermore, subsets of this file can be created and used at will, as long as it remains valid JSON. The 'hash' items are not essential, but assist in tracking if a default value has changed since the file was created, and thus a translation may be out of date. During an import operation, a best-effort approach is taken. Any paths and/or ids that do not match the target will be silently ignored. Thus, a cross-project import of field translations would only work for fields of the same name.",
+    "key": "es",
+    "display": "Spanish/Español",
+    "rtl": false,
+    "sort": "2",
+    "uiTranslations": [],
+    "uiOptions": [],
+    "formTranslations": [],
+    "eventTranslations": [],
+    "fieldTranslations": [],
+    "matrixTranslations": [],
+    "surveyTranslations": [],
+    "sqTranslations": [],
+    "asiTranslations": [],
+    "alertTranslations": [],
+    "mdcTranslations": [],
+    "pdfTranslations": [],
+    "protemailTranslations": []
+}
