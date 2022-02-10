@@ -7,6 +7,8 @@ Functionality of this script is split into 2 parts:
 * `extract_em_translations.py` makes a REDCap API call to the old project to obtain its entire collection of translations from the old Multilingual external module. Stores translations in a timestamped .csv file in `output/`, which is generated automatically.
 * `prepare_translations.py` uses this .csv file to provide translations to a .json file from the new REDCap project's MLM page. This creates another .json file that can be re-imported into the new REDCap project's MLM with all applicable translations pre-filled.
 
+Please note the license terms in `LICENSE.txt` - this tool is not guaranteed to be compatible with your own REDCap projects "out of the box"; some tinkering may be required. UCI MIND lacks the resources to maintain or add features to this tool, although we may push critical updates as necessary.
+
 # Before use
 * Edit `secrets.json` and add the API token and URL from your old REDCap project - the one with the Multilingual external module. Visit that project's "API" and "API Playground" pages for details.
 * Edit `languages.csv` and add the languages that your REDCap projects support.
