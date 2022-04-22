@@ -147,7 +147,8 @@ def apply_translations(translations: list[TranslatedField],
                         
                         if 'enum' in this_redcap_field and \
                         type(this_redcap_field['enum']) == list:
-                            #print(f"Field name (multiple choices in 'enum'): {field_name}")
+                            # Apply multiple-choice translations
+                            #print(f"Field name (multiple choices in 'enum'): {field_name} | via {this_redcap_field}")
                             multiple_choice_answers_list = this_redcap_field['enum']
                             for answer_index in range(len(multiple_choice_answers_list)):
                                 if multiple_choice_answers_list[answer_index]['translation'] == '':
@@ -155,6 +156,16 @@ def apply_translations(translations: list[TranslatedField],
                                     if csv_entry in translations:
                                         this_redcap_field['enum'][answer_index]['translation'] = translations[csv_entry].get_translation(desired_language, available_languages, replace_quotes)
                                         this_categorys_successful_translations += 1
+                        
+                        if 'note' in this_redcap_field and \
+                        'translation' in this_redcap_field['note'] and \
+                        this_redcap_field['note']['translation'] == '':
+                            # Apply field note translations
+                            csv_entry = field_name + "_p1000notes"
+                            if csv_entry in translations:
+                                # print(f"* {field_name} - field note in CSV: {csv_entry} | via {this_redcap_field}")
+                                this_redcap_field['note']['translation'] = translations[csv_entry].get_translation(desired_language, available_languages, replace_quotes)
+                                this_categorys_successful_translations += 1
                     else:
                         # Found a REDCap field with no corresponding translation in the CSV
                         redcap_fields_missing_translations.append(field_name)

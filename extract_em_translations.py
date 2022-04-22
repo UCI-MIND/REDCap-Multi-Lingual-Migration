@@ -18,23 +18,26 @@ def load_secrets(secrets_file_path: str) -> tuple[str, str]:
         return (result['old_proj_api_token'], result['old_proj_url'])
     raise ValueError(f"Failed to load {secrets_file_path} - did you fill in your REDCap project's API key and URL?")
 
-def _request_metadata(token: str, url: str) -> str:
+def _request_metadata(token: str, url: str, check_cert: bool) -> str:
     '''Makes a REDCap API call for a REDCap project's metadata.
     Returns the text of the API response.
+    Skips certificate checking if 'check_cert' is False.
     '''
     metadata_request = {
         'token': token,
         'content': 'metadata',
         'format': 'json'
     }
-    r = requests.post(url, data=metadata_request)
+    r = requests.post(url, data=metadata_request, verify=check_cert)
     #print('>>> Metadata request HTTP Status: ' + str(r.status_code))
     return r.text
 
-def get_metadata(token: str, url: str) -> list[dict]:
+def get_metadata(token: str, url: str, check_cert: bool) -> list[dict]:
     '''Returns a list of dictionaries that contain metadata for a REDCap project's fields.
     '''
-    raw_metadata_string = _request_metadata(token, url)
+    if not check_cert:
+        print("* Certificate checking is disabled.")
+    raw_metadata_string = _request_metadata(token, url, check_cert)
     md = json.loads(raw_metadata_string)
     if type(md) == dict and md['error']:
         print(f"REDCap API returned an error while fetching metadata: {md['error']}")
@@ -165,13 +168,14 @@ def write_translations_file(output_path: str, languages_dict: dict[str:str], md:
 
 def create_translations_file(secrets_path: str,
                              output_path: str,
-                             supported_languages_dict: dict[str:str]) -> None:
+                             supported_languages_dict: dict[str:str],
+                             check_certificate: bool) -> None:
     # supported_languages_dict = {'language_in_english':'language_in_native_language'} (example: {'Spanish':'Español'})
 
     API_TOKEN,API_URL = load_secrets(secrets_path)
     print(f"Loaded secrets file: {secrets_path}")
 
-    old_proj_metadata = get_metadata(API_TOKEN, API_URL)
+    old_proj_metadata = get_metadata(API_TOKEN, API_URL, check_certificate)
     print("Got old REDCap project metadata")
 
     num_lines_written = write_translations_file(output_path, supported_languages_dict, old_proj_metadata)

@@ -47,7 +47,7 @@ deactivate
 # Usage
 Use on a command line (brackets indicate optional arguments):
 ```
-python main.py [-h] -j JSON_TEMPLATE -l LANGUAGE [-o OUTPUT_FILE] [-q]
+python main.py [-h] -j JSON_TEMPLATE -l LANGUAGE [-o OUTPUT_FILE] [-q] [--no-check-certificate]
 ```
 
 Arguments:
@@ -57,7 +57,8 @@ Arguments:
 | `--json-template` | `-j` | ✅ | Path to a .json file downloaded from a new REDCap project's Multi-Language Management system. Configure this in tandem with `--language`. |
 | `--language` | `-l` | ✅ | Determines which language to translate REDCap fields to. Can be a two-character shortcode or a full name (i.e. 'es' or 'Spanish' are valid). Configure this in tandem with `--json-template`. |
 | `--output-file` | `-o` |  | Destination file of the filled-out template .json. If this argument is absent, the new .json file will be written to `output/` with a timestamped file name. |
-| `--replace-quotes` | `-q` |  | If this argument is provided, escaped double quote characters (`\"`) will be used in translated text. If this argument is absent, escaped double quote characters will be replaced with single quotes (`'`) (the default behavior). |
+| `--escaped-double-quotes` | `-q` |  | If this argument is provided, backslash characters are prepended to double quote characters (`\"`) in the final JSON translations file. If this argument is absent, double quote characters will be replaced with single quote characters (`'`). |
+| `--no-check-certificate` |  |  | If this argument is provided, certificate checking is disabled during the initial API request for translations from the older REDCap project. |
 
 To import your filled-in JSON files to your new REDCap project:
 * Multi-Language Management -> Actions -> "Edit Language" (the pencil icon) -> "Import from file or system" -> "Browse" and select your filled-in .json file -> check "use imported values" -> "Import"
