@@ -64,3 +64,8 @@ To import your filled-in JSON files to your new REDCap project:
 * Multi-Language Management -> Actions -> "Edit Language" (the pencil icon) -> "Import from file or system" -> "Browse" and select your filled-in .json file -> check "use imported values" -> "Import"
 
 After importing, it is highly recommended to perform a manual check of the translations to ensure that no fields were missed or translated incorrectly. Be vigilant for any non-functioning HTML or JSON-esque code fragments.
+
+# Funding
+
+To support our work and ensure future opportunities for development, please acknowledge the software and funding.
+The project was funded by The University of California, Irvine's Institute for Memory Impairments and Neurological Disorders (UCI MIND) grant, P30AG066519.
